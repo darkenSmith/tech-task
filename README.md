@@ -35,3 +35,6 @@ Enable country selection from a predefined country list
 ### Notes:
 - Your submission will be evaluated based on code quality, adherence to best practices, and completeness of the task
 - Thank you and good luck!
+
+- usage:
+  use ``./vendor/bin/sail up -d`` to run environment. 
