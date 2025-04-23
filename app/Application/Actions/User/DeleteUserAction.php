@@ -1,20 +1,19 @@
 <?php
-namespace App\Application\Actions;
+namespace App\Application\Actions\User;
 
 use App\Domain\User\Services\UserService;
 
-class GetUserAction
+class DeleteUserAction
 {
     private UserService $userService;
-    private string $id;
 
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
     }
 
-    public function execute(int $id): \App\Domain\User\Entities\User
+    public function execute(int $id): void
     {
-        return $this->userService->getById($id);
+        $this->userService->delete($id);
     }
 }

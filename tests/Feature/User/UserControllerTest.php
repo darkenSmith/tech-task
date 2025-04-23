@@ -76,6 +76,12 @@ class UserControllerTest extends TestCase
 
         $response = $this->putJson("/api/users/{$user->id}", [
             'name' => 'alex',
+            'surname' => $user->surname,
+            'email' => $user->email,
+            'phone' => $user->phone,
+            'country' => $user->country,
+            'gender' => $user->gender,
+            'profile_picture' => $user->profile_picture,
         ]);
 
         $response->assertStatus(200)
@@ -86,5 +92,22 @@ class UserControllerTest extends TestCase
                     'email' => 'john.doe@example.com',
                 ],
             ]);
+    }
+
+    public function test_delete_user_successfully(){
+        $user = User::factory()->create([
+            'name' => 'John',
+            'surname' => 'Doe',
+            'email' => 'john.doe@example.com',
+        ]);
+
+        $response = $this->deleteJson("/api/users/{$user->id}");
+        $response->assertStatus(204);
+
+        $this->assertDatabaseMissing('users', [
+            'name' => 'John',
+            'surname' => 'Doe',
+            'email' => 'john.doe@example.com',
+        ]);
     }
 }

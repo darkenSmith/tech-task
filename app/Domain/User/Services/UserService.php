@@ -60,7 +60,6 @@ class UserService
         }
 
         $user->update($name, $surname, $email, $phone, $country, $gender, $profilePicture);
-        $this->repository->save($user);
         return $user;
     }
 

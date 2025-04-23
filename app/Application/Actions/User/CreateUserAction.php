@@ -1,24 +1,28 @@
 <?php
-namespace App\Application\Actions;
+namespace App\Application\Actions\User;
 
-use App\Application\DTOs\UpdateUserDTO;
+use App\Application\DTOs\CreateUserDTO;
+use App\Domain\User\Exceptions\UserException;
 use App\Domain\User\Services\UserService;
-use App\Domain\User\ValueObjects\Email;
-use App\Domain\User\ValueObjects\Phone;
 use App\Domain\User\ValueObjects\Country;
+use App\Domain\User\ValueObjects\Email;
 use App\Domain\User\ValueObjects\Gender;
 use App\Domain\User\ValueObjects\Name;
+use App\Domain\User\ValueObjects\Phone;
 
-class UpdateUserAction
+class CreateUserAction
 {
-    private $userService;
+    private UserService $userService;
 
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
     }
 
-    public function execute(int $id, UpdateUserDTO $dto): \App\Domain\User\Entities\User
+    /**
+     * @throws UserException
+     */
+    public function execute(CreateUserDTO $dto): \App\Domain\User\Entities\User
     {
         $name = new Name($dto->name);
         $surname = new Name($dto->surname);
@@ -27,14 +31,14 @@ class UpdateUserAction
         $country = new Country($dto->country);
         $gender = new Gender($dto->gender);
 
-        return $this->userService->update(
-            $id,
+        return $this->userService->create(
             $name,
             $surname,
             $email,
             $phone,
             $country,
             $gender,
+            $dto->password,
             $dto->profilePicture
         );
     }

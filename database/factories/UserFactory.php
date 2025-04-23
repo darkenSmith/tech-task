@@ -29,7 +29,7 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'surname' => fake()->lastname(),
-            'phone' => fake()->phoneNumber(),
+            'phone' => fake()->phoneNumber,
             'country' => fake()->randomElement(Countries::all()),
             'gender' => \fake()->randomElement(['male', 'female']),
             'profile_picture' => fake()->imageUrl(),

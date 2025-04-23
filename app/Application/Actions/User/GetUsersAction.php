@@ -1,5 +1,5 @@
 <?php
-namespace App\Application\Actions;
+namespace App\Application\Actions\User;
 
 use App\Domain\User\Services\UserService;
 
